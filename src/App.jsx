@@ -44,7 +44,7 @@ function App() {
   // API Call: Fetch performance aggregation telemetry benchmarks
   const fetchAnalytics = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/simulations/analytics');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/simulations/analytics`);
       const json = await response.json();
       if (json.success) setAnalytics(json.data);
     } catch (err) {
