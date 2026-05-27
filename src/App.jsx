@@ -43,14 +43,14 @@ function App() {
 
   // API Call: Fetch performance aggregation telemetry benchmarks
   const fetchAnalytics = async () => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/simulations/analytics`);
-      const json = await response.json();
-      if (json.success) setAnalytics(json.data);
-    } catch (err) {
-      console.error('Error fetching analytics:', err);
-    }
-  };
+  try {
+    const response = await fetch(`/api/simulations/analytics`); // Note the leading slash
+    const json = await response.json();
+    if (json.success) setAnalytics(json.data);
+  } catch (err) {
+    console.error('Error fetching analytics:', err);
+  }
+};
 
   useEffect(() => {
     fetchAnalytics();

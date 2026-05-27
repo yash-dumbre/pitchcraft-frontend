@@ -51,16 +51,17 @@ function Simulator({ email, setEmail, scenario, setScenario, transcript, setTran
 
     try {
       // 2. Fetch the true AI response from your server chat endpoint with correct payloads
-      const response = await fetch('http://localhost:5000/api/simulations/chat', {
+
+      const response = await fetch('/api/simulations/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           scenario: scenario, 
-          message: userLatestMsg, // Explicitly tell the backend what you typed
-          history: updatedWithRep  // Pass down the history context array for Gemini's memory 
+          message: userLatestMsg, 
+          history: updatedWithRep 
         })
       });
-      
+            
       const json = await response.json();
       
       if (json.success) {
@@ -84,7 +85,11 @@ function Simulator({ email, setEmail, scenario, setScenario, transcript, setTran
     }
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/simulations/submit', {
+      // CHANGE THIS:
+// const response = await fetch('http://localhost:5000/api/simulations/submit', { ... });
+
+// TO THIS (Relative path):
+      const response = await fetch('/api/simulations/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, scenario, transcript })
